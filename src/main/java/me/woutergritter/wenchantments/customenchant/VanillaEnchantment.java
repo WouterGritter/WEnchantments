@@ -14,6 +14,10 @@ public class VanillaEnchantment implements WEnchantment {
         this.displayName = getDisplayName(enchantment);
     }
 
+    public Enchantment getVanillaEnchantment() {
+        return enchantment;
+    }
+
     @Override
     public String getName() {
         return enchantment.getName();
