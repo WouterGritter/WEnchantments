@@ -1,6 +1,6 @@
 package me.woutergritter.wenchantments.util.inventory.gui;
 
-import me.woutergritter.wenchantments.Main;
+import me.woutergritter.wenchantments.WEnchantments;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -33,7 +33,7 @@ public abstract class GUI<T extends GUIParams> {
             ConfigurationSection itemConf = itemsConf.getConfigurationSection(key);
             boolean success = loadItem(itemConf);
             if(!success) {
-                Main.instance().getLogger().warning("Could not load item '" + key + "' for GUI '" + title + "'.");
+                WEnchantments.instance().getLogger().warning("Could not load item '" + key + "' for GUI '" + title + "'.");
             }
         });
     }

@@ -1,6 +1,6 @@
 package me.woutergritter.wenchantments.util.serialization;
 
-import me.woutergritter.wenchantments.Main;
+import me.woutergritter.wenchantments.WEnchantments;
 import me.woutergritter.wenchantments.util.function.ThrowingConsumer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -27,9 +27,9 @@ public class DatFile {
 
     public DatFile savePeriodically(int intervalTicks, boolean async) {
         if(async) {
-            Bukkit.getScheduler().runTaskTimerAsynchronously(Main.instance(), this::saveIfScheduled, intervalTicks, intervalTicks);
+            Bukkit.getScheduler().runTaskTimerAsynchronously(WEnchantments.instance(), this::saveIfScheduled, intervalTicks, intervalTicks);
         }else{
-            Bukkit.getScheduler().runTaskTimer(Main.instance(), this::saveIfScheduled, intervalTicks, intervalTicks);
+            Bukkit.getScheduler().runTaskTimer(WEnchantments.instance(), this::saveIfScheduled, intervalTicks, intervalTicks);
         }
 
         return this;
@@ -45,11 +45,11 @@ public class DatFile {
         Bukkit.getPluginManager().registerEvents(new Listener() {
             @EventHandler
             public void onPluginDisableEvent(PluginDisableEvent e) {
-                if(e.getPlugin() == Main.instance()) {
+                if(e.getPlugin() == WEnchantments.instance()) {
                     saveIfScheduled();
                 }
             }
-        }, Main.instance());
+        }, WEnchantments.instance());
 
         return this;
     }
@@ -80,7 +80,7 @@ public class DatFile {
             dos = new BukkitDataOutputStream(new FileOutputStream(file));
             saver.accept(dos);
         }catch(IOException e) {
-            Main.instance().getLogger().warning("Could not save dat file '" + file.getName() + "': " + e.toString());
+            WEnchantments.instance().getLogger().warning("Could not save dat file '" + file.getName() + "': " + e.toString());
             e.printStackTrace();
         }
 
@@ -105,7 +105,7 @@ public class DatFile {
             dis = new BukkitDataInputStream(new FileInputStream(file));
             loader.accept(dis);
         }catch(IOException e) {
-            Main.instance().getLogger().warning("Could not load dat file '" + file.getName() + "': " + e.toString());
+            WEnchantments.instance().getLogger().warning("Could not load dat file '" + file.getName() + "': " + e.toString());
             e.printStackTrace();
         }
 

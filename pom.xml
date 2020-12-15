@@ -16,7 +16,7 @@
     <properties>
         <!-- Plugin information (used in plugin.yml) -->
         <author>Wouter Gritter</author>
-        <mainClass>me.woutergritter.wenchantments.Main</mainClass>
+        <mainClass>me.woutergritter.wenchantments.WEnchantments</mainClass>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

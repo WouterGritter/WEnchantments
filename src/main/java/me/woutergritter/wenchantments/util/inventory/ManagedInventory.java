@@ -1,6 +1,6 @@
 package me.woutergritter.wenchantments.util.inventory;
 
-import me.woutergritter.wenchantments.Main;
+import me.woutergritter.wenchantments.WEnchantments;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -56,7 +56,7 @@ public class ManagedInventory implements Listener {
         isOpened = true;
         player.openInventory(inventory);
 
-        Bukkit.getPluginManager().registerEvents(this, Main.instance());
+        Bukkit.getPluginManager().registerEvents(this, WEnchantments.instance());
 
         return this;
     }
@@ -70,7 +70,7 @@ public class ManagedInventory implements Listener {
         try{
             onClick.accept(e);
         }catch(Exception ex) {
-            Main.instance().getLogger().warning("An exception occurred when processing a GUI click for player " + e.getWhoClicked().getName() + ": " + ex.toString());
+            WEnchantments.instance().getLogger().warning("An exception occurred when processing a GUI click for player " + e.getWhoClicked().getName() + ": " + ex.toString());
             ex.printStackTrace();
         }
     }
@@ -84,7 +84,7 @@ public class ManagedInventory implements Listener {
         try{
             onClose.accept(e);
         }catch(Exception ex) {
-            Main.instance().getLogger().warning("An exception occurred when processing a GUI close for player " + e.getPlayer().getName() + ": " + ex.toString());
+            WEnchantments.instance().getLogger().warning("An exception occurred when processing a GUI close for player " + e.getPlayer().getName() + ": " + ex.toString());
             ex.printStackTrace();
         }
 
@@ -95,7 +95,7 @@ public class ManagedInventory implements Listener {
 
     @EventHandler
     public void onPluginDisableEvent(PluginDisableEvent e) {
-        if(e.getPlugin() != Main.instance()) {
+        if(e.getPlugin() != WEnchantments.instance()) {
             return;
         }
 

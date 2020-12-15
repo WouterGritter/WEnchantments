@@ -3,8 +3,8 @@ package me.woutergritter.wenchantments;
 import me.woutergritter.wenchantments.customenchant.EnchantmentManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin {
-    private static Main instance; // Main is a singleton
+public class WEnchantments extends JavaPlugin {
+    private static WEnchantments instance; // Main is a singleton
 
     // -- Managers -- //
     private EnchantmentManager enchantmentManager;
@@ -22,11 +22,11 @@ public class Main extends JavaPlugin {
         instance = null;
     }
 
-    public EnchantmentManager getEnchantmentManager() {
-        return enchantmentManager;
+    public static EnchantmentManager getEnchantmentManager() {
+        return instance.enchantmentManager;
     }
 
-    public static Main instance() {
+    public static WEnchantments instance() {
         return instance;
     }
 }
