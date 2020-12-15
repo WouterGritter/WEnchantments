@@ -1,6 +1,7 @@
 package me.woutergritter.wenchantments;
 
 import me.woutergritter.wenchantments.customenchant.EnchantmentManager;
+import me.woutergritter.wenchantments.customenchant.potionenchant.PotionEnchantManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WEnchantments extends JavaPlugin {
@@ -8,6 +9,7 @@ public class WEnchantments extends JavaPlugin {
 
     // -- Managers -- //
     private EnchantmentManager enchantmentManager;
+    private PotionEnchantManager potionEnchantManager;
 
     @Override
     public void onEnable() {
@@ -15,6 +17,7 @@ public class WEnchantments extends JavaPlugin {
 
         // Managers
         enchantmentManager = new EnchantmentManager();
+        potionEnchantManager = new PotionEnchantManager();
     }
 
     @Override
@@ -24,6 +27,10 @@ public class WEnchantments extends JavaPlugin {
 
     public static EnchantmentManager getEnchantmentManager() {
         return instance.enchantmentManager;
+    }
+
+    public static PotionEnchantManager getPotionEnchantManager() {
+        return instance.potionEnchantManager;
     }
 
     public static WEnchantments instance() {
