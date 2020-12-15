@@ -1,5 +1,6 @@
 package me.woutergritter.wenchantments.customenchant;
 
+import me.woutergritter.wenchantments.WEnchantments;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -97,5 +98,9 @@ public class CustomEnchantment implements WEnchantment {
         }catch(NumberFormatException ignored) {}
 
         return 0;
+    }
+
+    public void register() {
+        WEnchantments.getEnchantmentManager().register(this);
     }
 }
