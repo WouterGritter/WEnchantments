@@ -27,6 +27,10 @@ public class PotionEnchantManager implements Listener {
 
     public PotionEnchantManager() {
         for(PotionEffectType potionEffectType : PotionEffectType.values()) {
+            if(potionEffectType == null) {
+                continue;
+            }
+
             PotionEffectEnchantment potionEnchant = new PotionEffectEnchantment(potionEffectType);
             potionEnchant.register();
 
