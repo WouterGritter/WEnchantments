@@ -94,7 +94,7 @@ public class PotionEnchantManager implements Listener {
         if(playerPotionEffects != null) {
             playerPotionEffects.forEach((pet, level) -> {
                 player.removePotionEffect(pet);
-                player.addPotionEffect(new PotionEffect(pet, POTION_EFFECT_DURATION, level - 1, true, false, false));
+                player.addPotionEffect(new PotionEffect(pet, POTION_EFFECT_DURATION, level - 1, true, false));
             });
         }
     }
