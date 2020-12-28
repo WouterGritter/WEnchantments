@@ -1,54 +1,51 @@
 package me.woutergritter.wenchantments.customenchant;
 
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import static org.bukkit.enchantments.Enchantment.*;
 
-public class VanillaEnchantment implements WEnchantment {
-    private final Enchantment enchantment;
-    private final String displayName;
+public class VanillaEnchantment extends CustomEnchantment {
+    private final Enchantment vanillaEnchantment;
 
-    public VanillaEnchantment(Enchantment enchantment) {
-        this.enchantment = enchantment;
-        this.displayName = getDisplayName(enchantment);
+    public VanillaEnchantment(Enchantment vanillaEnchantment) {
+        super(vanillaEnchantment.getName(), getDisplayName(vanillaEnchantment));
+
+        this.vanillaEnchantment = vanillaEnchantment;
     }
 
     public Enchantment getVanillaEnchantment() {
-        return enchantment;
-    }
-
-    @Override
-    public String getName() {
-        return enchantment.getName();
-    }
-
-    @Override
-    public String getDisplayName() {
-        return displayName;
+        return vanillaEnchantment;
     }
 
     @Override
     public boolean apply(ItemStack item, int level) {
         if(item == null) return false;
 
-        item.addUnsafeEnchantment(enchantment, level);
-        return item.getEnchantmentLevel(enchantment) == level;
+        ItemMeta itemMeta = item.getItemMeta();
+        if(itemMeta == null) return false;
+
+        itemMeta.removeEnchant(vanillaEnchantment);
+        itemMeta.addEnchant(vanillaEnchantment, level, true);
+
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        item.setItemMeta(itemMeta);
+
+        super.apply(item, level);
+        return true;
     }
 
     @Override
     public boolean remove(ItemStack item) {
         if(item == null) return false;
 
-        int prevLevel = item.removeEnchantment(enchantment);
+        int prevLevel = item.removeEnchantment(vanillaEnchantment);
+
+        super.remove(item);
         return prevLevel > 0;
-    }
-
-    @Override
-    public int getLevel(ItemStack item) {
-        if(item == null) return 0;
-
-        return item.getEnchantmentLevel(enchantment);
     }
 
     private static String getDisplayName(Enchantment enchantment) {
