@@ -114,4 +114,8 @@ public class CustomEnchantment implements WEnchantment {
     public void register() {
         WEnchantments.getEnchantmentManager().register(this);
     }
+
+    public static boolean isCustomEnchantLore(String lore) {
+        return lore.startsWith(LORE_PREFIX);
+    }
 }
