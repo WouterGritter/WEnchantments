@@ -2,6 +2,8 @@ package me.woutergritter.wenchantments.customenchant;
 
 import me.woutergritter.wenchantments.WEnchantments;
 import org.bukkit.ChatColor;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class CustomEnchantment implements WEnchantment {
     private static final String LORE_PREFIX = ChatColor.RED.toString() + ChatColor.WHITE.toString() + ChatColor.BLUE.toString() + ChatColor.GRAY.toString();
+    private static final Enchantment DUMMY_ENCHANT = Enchantment.PROTECTION_ENVIRONMENTAL;
 
     private final String name;
     private final String displayName;
@@ -46,8 +49,13 @@ public class CustomEnchantment implements WEnchantment {
         lore.add(enchantmentPrefix + level);
 
         itemMeta.setLore(lore);
-        item.setItemMeta(itemMeta);
 
+        if(!itemMeta.hasEnchants()) {
+            itemMeta.addEnchant(DUMMY_ENCHANT, 0, true);
+            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        item.setItemMeta(itemMeta);
         return true;
     }
 
@@ -69,6 +77,9 @@ public class CustomEnchantment implements WEnchantment {
 
         if(removed) {
             itemMeta.setLore(lore);
+
+            // TODO: Remove the DUMMY_ENCHANT if needed..
+
             item.setItemMeta(itemMeta);
         }
 
