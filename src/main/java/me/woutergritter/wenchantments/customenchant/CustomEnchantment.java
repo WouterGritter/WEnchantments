@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomEnchantment implements WEnchantment {
-    private static final String PREFIX = ChatColor.RED.toString() + ChatColor.WHITE.toString() + ChatColor.BLUE.toString() + ChatColor.GRAY.toString();
+    private static final String LORE_PREFIX = ChatColor.RED.toString() + ChatColor.WHITE.toString() + ChatColor.BLUE.toString() + ChatColor.GRAY.toString();
 
     private final String name;
     private final String displayName;
@@ -19,7 +19,7 @@ public class CustomEnchantment implements WEnchantment {
         this.name = name;
         this.displayName = displayName;
 
-        this.enchantmentPrefix = PREFIX + displayName + " ";
+        this.enchantmentPrefix = LORE_PREFIX + displayName + " ";
     }
 
     @Override
