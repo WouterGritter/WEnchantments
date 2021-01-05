@@ -1,5 +1,6 @@
 package me.woutergritter.wenchantments.customenchant;
 
+import me.woutergritter.wenchantments.WEnchantments;
 import org.bukkit.inventory.ItemStack;
 
 public interface WEnchantment {
@@ -38,5 +39,13 @@ public interface WEnchantment {
      */
     default boolean has(ItemStack item) {
         return getLevel(item) > 0;
+    }
+
+    /**
+     * Registers this enchantment.
+     * Does exactly the same as: <code>WEnchantments.getEnchantmentManager().register(this)</code>
+     */
+    default void register() {
+        WEnchantments.getEnchantmentManager().register(this);
     }
 }
